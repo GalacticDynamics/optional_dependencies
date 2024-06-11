@@ -1,0 +1,8 @@
+{
+  "MATPLOTLIB": "matplotlib",
+  "NUMPY": "numpy",
+  "PANDAS": "pandas",
+  "PYTEST": "pytest",
+  "PYYAML": "pyyaml",
+  "SCIPY": "scipy"
+}
