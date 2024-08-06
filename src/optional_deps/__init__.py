@@ -2,6 +2,7 @@
 
 optional_deps: Check for Optional Dependencies
 """
+# pylint: disable=import-outside-toplevel
 
 from __future__ import annotations
 
