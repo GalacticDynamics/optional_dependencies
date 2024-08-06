@@ -24,7 +24,9 @@
     "Topic :: Scientific/Engineering",
     "Typing :: Typed",
   ]
-  dependencies = []
+  dependencies = [
+    "packaging",
+  ]
   description = "Check for Optional Dependencies"
   dynamic = ["version"]
   license.file = "LICENSE"
