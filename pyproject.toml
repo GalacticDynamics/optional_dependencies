@@ -1,0 +1,143 @@
+[build-system]
+  build-backend = "hatchling.build"
+  requires      = ["hatch-vcs", "hatchling"]
+
+
+[project]
+  authors = [
+    { name = "GalacticDynamics Maintainers", email = "nstarman@users.noreply.github.com" },
+  ]
+  classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python",
+    "Topic :: Scientific/Engineering",
+    "Typing :: Typed",
+  ]
+  dependencies = [
+    "packaging",
+  ]
+  description = "Check for Optional Dependencies"
+  dynamic = ["version"]
+  license.file = "LICENSE"
+  name = "optional_deps"
+  readme = "README.md"
+  requires-python = ">=3.8"
+
+  [project.optional-dependencies]
+    dev = ["pytest >=6", "pytest-cov >=3"]
+    docs = [
+      "furo>=2023.08.17",
+      "myst_parser>=0.13",
+      "sphinx>=7.0",
+      "sphinx_autodoc_typehints",
+      "sphinx_copybutton",
+    ]
+    test = ["pytest >=6", "pytest-cov >=3"]
+
+  [project.urls]
+    "Bug Tracker" = "https://github.com/GalacticDynamics/optional_deps/issues"
+    Changelog     = "https://github.com/GalacticDynamics/optional_deps/releases"
+    Discussions   = "https://github.com/GalacticDynamics/optional_deps/discussions"
+    Homepage      = "https://github.com/GalacticDynamics/optional_deps"
+
+
+[tool.hatch]
+  build.hooks.vcs.version-file = "src/optional_deps/_version.py"
+  version.source               = "vcs"
+
+  [tool.hatch.envs.default]
+    features     = ["test"]
+    scripts.test = "pytest {args}"
+
+
+[tool.pytest.ini_options]
+  addopts        = ["--showlocals", "--strict-config", "--strict-markers", "-ra"]
+  filterwarnings = ["error"]
+  log_cli_level  = "INFO"
+  minversion     = "6.0"
+  testpaths      = ["tests"]
+  xfail_strict   = true
+
+
+[tool.coverage]
+  report.exclude_also = ['\.\.\.', 'if typing.TYPE_CHECKING:']
+  run.source          = ["optional_deps"]
+
+[tool.mypy]
+  disallow_incomplete_defs = false
+  disallow_untyped_defs = false
+  enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
+  exclude = [
+    '(^/)docs/',                        # docs
+    '(^|/)tests/',                      # tests
+    '^conftest\.py$',                   # nox test configuration
+  ]
+  files = ["src"]
+  python_version = "3.8"
+  strict = true
+  warn_unreachable = true
+  warn_unused_configs = true
+
+  [[tool.mypy.overrides]]
+    disallow_incomplete_defs = true
+    disallow_untyped_defs    = true
+    module                   = "optional_deps.*"
+
+
+[tool.ruff]
+  src            = ["src"]
+  target-version = "py38"
+
+  [tool.ruff.lint]
+    extend-select = ["ALL"]
+    ignore = [
+      "ANN101",  # Missing type annotation for self in method
+      "COM812",
+      "D203",    # 1 blank line required before class docstring
+      "D213",    # Multi-line docstring summary should start at the second line
+      "ISC001",  # Conflicts with formatter
+      "PLR09",   # Too many <...>
+      "PLR2004", # Magic value used in comparison
+    ]
+
+    [tool.ruff.lint.per-file-ignores]
+      "docs/conf.py" = [
+        "A001",   # Variable `copyright` is shadowing a Python builtin
+        "INP001", # implicit namespace package
+      ]
+      "noxfile.py" = ["T20"]
+      "tests/**" = [
+        "ANN",
+        "D10",
+        "S101", # Use of assert detected,
+        "T20",
+      ]
+
+    [tool.ruff.lint.isort]
+      combine-as-imports = true
+
+
+[tool.pylint]
+  ignore-paths = [".*/__init__.pyi", ".*/_version.py"]
+  messages_control.disable = [
+    "design",
+    "fixme",
+    "line-too-long",
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "wrong-import-position",
+  ]
+  py-version = "3.8"
+  reports.output-format = "colorized"
+  similarities.ignore-imports = "yes"
