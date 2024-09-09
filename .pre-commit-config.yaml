@@ -54,7 +54,6 @@ repos:
     hooks:
       - id: mypy
         files: src
-        exclude: ^(src/optional_deps/__init__\.py)$
         args: []
         additional_dependencies:
           - pytest

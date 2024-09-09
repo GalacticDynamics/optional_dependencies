@@ -3,7 +3,7 @@
 import pytest
 from packaging.version import Version
 
-from optional_deps import OptionalDependencyEnum, auto
+from optional_dependencies import OptionalDependencyEnum, auto
 
 
 class OptDeps(OptionalDependencyEnum):
