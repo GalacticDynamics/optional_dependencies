@@ -27,10 +27,10 @@
   dependencies = [
     "packaging",
   ]
-  description = "Check for Optional Dependencies"
+  description = "Construct Checks for Optional Dependencies"
   dynamic = ["version"]
   license.file = "LICENSE"
-  name = "optional_deps"
+  name = "optional_dependencies"
   readme = "README.md"
   requires-python = ">=3.8"
 
@@ -46,14 +46,14 @@
     test = ["pytest >=6", "pytest-cov >=3"]
 
   [project.urls]
-    "Bug Tracker" = "https://github.com/GalacticDynamics/optional_deps/issues"
-    Changelog     = "https://github.com/GalacticDynamics/optional_deps/releases"
-    Discussions   = "https://github.com/GalacticDynamics/optional_deps/discussions"
-    Homepage      = "https://github.com/GalacticDynamics/optional_deps"
+    "Bug Tracker" = "https://github.com/GalacticDynamics/optional_dependencies/issues"
+    Changelog     = "https://github.com/GalacticDynamics/optional_dependencies/releases"
+    Discussions   = "https://github.com/GalacticDynamics/optional_dependencies/discussions"
+    Homepage      = "https://github.com/GalacticDynamics/optional_dependencies"
 
 
 [tool.hatch]
-  build.hooks.vcs.version-file = "src/optional_deps/_version.py"
+  build.hooks.vcs.version-file = "src/optional_dependencies/_version.py"
   version.source               = "vcs"
 
   [tool.hatch.envs.default]
@@ -72,14 +72,13 @@
 
 [tool.coverage]
   report.exclude_also = ['\.\.\.', 'if typing.TYPE_CHECKING:']
-  run.source          = ["optional_deps"]
+  run.source          = ["optional_dependencies"]
 
 [tool.mypy]
   disallow_incomplete_defs = false
   disallow_untyped_defs = false
   enable_error_code = ["ignore-without-code", "redundant-expr", "truthy-bool"]
   exclude = [
-    '(^/)docs/',                        # docs
     '(^|/)tests/',                      # tests
     '^conftest\.py$',                   # nox test configuration
   ]
@@ -92,7 +91,7 @@
   [[tool.mypy.overrides]]
     disallow_incomplete_defs = true
     disallow_untyped_defs    = true
-    module                   = "optional_deps.*"
+    module                   = "optional_dependencies.*"
 
 
 [tool.ruff]

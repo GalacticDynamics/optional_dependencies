@@ -1,6 +1,6 @@
 """Copyright (c) 2024 GalacticDynamics Maintainers. All rights reserved.
 
-optional_deps: Check for Optional Dependencies
+optional_dependencies: Check for Optional Dependencies
 """
 # pylint: disable=import-outside-toplevel
 

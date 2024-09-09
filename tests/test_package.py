@@ -2,9 +2,9 @@
 
 import importlib.metadata
 
-import optional_deps as pkg
+import optional_dependencies as pkg
 
 
 def test_version():
     """Test the version."""
-    assert importlib.metadata.version("optional_deps") == pkg.__version__
+    assert importlib.metadata.version("optional_dependencies") == pkg.__version__

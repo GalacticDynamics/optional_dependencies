@@ -6,7 +6,7 @@ email: nstarman@users.noreply.github.com
 full_name: GalacticDynamics Maintainers
 license: MIT
 org: GalacticDynamics
-project_name: optional_deps
-project_short_description: Check for Optional Dependencies
-url: https://github.com/GalacticDynamics/optional_deps
+project_name: optional_dependencies
+project_short_description: Construct Checks for Optional Dependencies
+url: https://github.com/GalacticDynamics/optional_dependencies
 vcs: true
