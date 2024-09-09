@@ -64,5 +64,7 @@ We welcome contributions!
 [pypi-link]:                https://pypi.org/project/optional_dependencies/
 [pypi-platforms]:           https://img.shields.io/pypi/pyversions/optional_dependencies
 [pypi-version]:             https://img.shields.io/pypi/v/optional_dependencies
+[zenodo-badge]:             https://zenodo.org/badge/DOI/10.5281/zenodo.13738124.svg
+[zenodo-link]:              https://zenodo.org/doi/10.5281/zenodo.13738123
 
 <!-- prettier-ignore-end -->
