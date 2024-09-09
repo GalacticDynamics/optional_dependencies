@@ -53,6 +53,8 @@ consider citing this work.
 [![codecov][codecov-badge]][codecov-link]
 [![Actions Status][actions-badge]][actions-link]
 
+We welcome contributions!
+
 <!-- prettier-ignore-start -->
 
 [actions-badge]:            https://github.com/GalacticDynamics/optional_dependencies/workflows/CI/badge.svg
