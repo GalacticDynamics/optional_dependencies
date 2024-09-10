@@ -40,7 +40,7 @@ class OptDeps(OptionalDependencyEnum):
 OptDeps.PACKAGING
 # <OptDeps.PACKAGING: <Version('...')>>
 
-OptDeps.PACKAGING.is_installed
+OptDeps.PACKAGING.installed
 # True
 
 OptDeps.PACKAGING.version
