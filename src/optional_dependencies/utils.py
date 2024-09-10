@@ -48,7 +48,10 @@ def is_installed(pkg_name: str, /) -> bool:
     True
 
     """
-    spec = importlib.util.find_spec(pkg_name)
+    try:
+        spec = importlib.util.find_spec(pkg_name)
+    except ModuleNotFoundError:
+        return False
     return spec is not None
 
 
