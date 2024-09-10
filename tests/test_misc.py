@@ -6,6 +6,7 @@ import pytest
 from packaging.version import Version
 
 from optional_dependencies import OptionalDependencyEnum, auto
+from optional_dependencies._core import Comparator
 
 
 class OptDeps(OptionalDependencyEnum):
@@ -97,3 +98,10 @@ def test_eq():
 
     # Something not installed
     assert not OptDeps.NOTINSTALLED == Version("1.0")  # noqa: SIM201, SIM300
+
+
+def test_comparator():
+    assert isinstance(type(OptDeps.PACKAGING).__lt__, Comparator)
+    assert isinstance(type(OptDeps.PACKAGING).__le__, Comparator)
+    assert isinstance(type(OptDeps.PACKAGING).__ge__, Comparator)
+    assert isinstance(type(OptDeps.PACKAGING).__gt__, Comparator)
