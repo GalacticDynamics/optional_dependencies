@@ -47,7 +47,7 @@ class OptionalDependencyEnum(Enum):
         return get_version(name)
 
     @property
-    def is_installed(self) -> bool:
+    def installed(self) -> bool:
         """Check if the optional dependency is installed.
 
         Returns
@@ -61,7 +61,7 @@ class OptionalDependencyEnum(Enum):
         >>> class OptDeps(OptionalDependencyEnum):
         ...     PACKAGING = auto()
 
-        >>> OptDeps.PACKAGING.is_installed
+        >>> OptDeps.PACKAGING.installed
         True
 
         """
@@ -91,7 +91,7 @@ class OptionalDependencyEnum(Enum):
         <Version('20.9')>
 
         """
-        if not self.is_installed:
+        if not self.installed:
             msg = f"{self.name} is not installed"
             raise ImportError(msg)
 
