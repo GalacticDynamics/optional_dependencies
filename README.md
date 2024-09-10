@@ -84,13 +84,13 @@ The low-level functions are:
   regularized form of
   [`importlib.util.find_spec`](https://docs.python.org/3/library/importlib.html#importlib.util.find_spec).
 
-- `optional_dependencies.utils.get_version(pkg_name: str) -> Version | Literal[InstalledState.NOT_INSTALLED]`:
+- `optional_dependencies.utils.get_version(pkg_name: str, /) -> Version | Literal[InstalledState.NOT_INSTALLED]`:
   for getting the [`packaging.Version`][Version-link] of a package if it is
   installed, or returning `NOT_INSTALLED` otherwise.
 
-- `optional_dependencies.utils.chain_checks`: for chaining checks together and
-  ensuring the returned value is still a [`packaging.Version`][Version-link] or
-  `NOT_INSTALLED`.
+- `optional_dependencies.utils.chain_checks(version: Version, /, *checks: bool)`:
+  for chaining checks together and ensuring the returned value is still a
+  [`packaging.Version`][Version-link] or `NOT_INSTALLED`.
 
 As a pseudo-code example of a package with c-compiled code that :
 
@@ -98,11 +98,22 @@ As a pseudo-code example of a package with c-compiled code that :
 from optional_dependencies.utils import is_installed, get_version, chain_checks
 
 # A subpackage needs to be checked.
-chain_checks(get_version("package"), is_installed("package.subpackage"))
+chain_checks(get_version("package1"), is_installed("package1.subpackage"))
 # <Version('...')>
 
-chain_checks(get_version("package"), is_installed("package.subpackage"))
+# This package is not installed correctly
+chain_checks(get_version("package2"), is_installed("package2.subpackage"))
 # <InstalledState.NOT_INSTALLED: False>
+```
+
+The low-level API can be used with `OptionalDependencyEnum`
+
+```python
+class OptDeps(OptionalDependencyEnum):
+    PACKAGING = auto()
+    THIS_IS_NOT_INSTALLED = chain_checks(
+        get_version("package2"), is_installed("package2.subpackage")
+    )
 ```
 
 ## Citation
