@@ -4,40 +4,13 @@ from __future__ import annotations
 
 __all__: list[str] = []
 
-import importlib.metadata
 from enum import Enum
 from typing import Literal, cast
 
 from packaging.utils import canonicalize_name
-from packaging.version import Version, parse
+from packaging.version import Version
 
-
-def _get_version(package_name: str, /) -> Version | Literal[False]:
-    """Get the version of a package if it is installed.
-
-    Parameters
-    ----------
-    package_name : str
-        The name of the package to check.
-
-    Returns
-    -------
-    Version | Literal[False]
-        The version of the package if it is installed, or False if it is not.
-
-    Examples
-    --------
-    >>> _get_version("packaging")
-    <Version('20.9')>
-
-    """
-    try:
-        # Get the version string of the package
-        version_str = importlib.metadata.version(package_name)
-    except importlib.metadata.PackageNotFoundError:
-        return False
-    # Parse the version string using packaging.version.parse
-    return parse(version_str)
+from .utils import InstalledState, get_version
 
 
 class OptionalDependencyEnum(Enum):
@@ -48,8 +21,8 @@ class OptionalDependencyEnum(Enum):
         name: str,
         start: int,  # noqa: ARG004
         count: int,  # noqa: ARG004
-        last_values: list[Version | Literal[False]],  # noqa: ARG004
-    ) -> Version | Literal[False]:
+        last_values: list[Version | Literal[InstalledState.NOT_INSTALLED]],  # noqa: ARG004
+    ) -> Version | Literal[InstalledState.NOT_INSTALLED]:
         """Generate the next value (optional dependency info) for the Enum.
 
         Parameters
@@ -63,8 +36,15 @@ class OptionalDependencyEnum(Enum):
         last_values : list[Version | Literal[False]]
             The last values generated for the enumeration
 
+        Raises
+        ------
+        `packaging.utils.InvalidName`
+            If the package name is invalid. See
+            `packaging.utils.canonicalize_name` for more information.
+
         """
-        return _get_version(canonicalize_name(name))
+        name = canonicalize_name(name, validate=True)
+        return get_version(name)
 
     @property
     def is_installed(self) -> bool:
@@ -85,7 +65,7 @@ class OptionalDependencyEnum(Enum):
         True
 
         """
-        return self.value is not False
+        return self.value is not InstalledState.NOT_INSTALLED
 
     @property
     def version(self) -> Version:
