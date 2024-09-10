@@ -55,7 +55,7 @@
   version.source               = "vcs"
 
   [tool.hatch.envs.default]
-    features     = ["test"]
+    features     = ["src", "test"]
     scripts.test = "pytest {args}"
 
 
@@ -64,7 +64,7 @@
   filterwarnings = ["error"]
   log_cli_level  = "INFO"
   minversion     = "6.0"
-  testpaths      = ["tests"]
+  testpaths      = ["src", "tests"]
   xfail_strict   = true
 
 
