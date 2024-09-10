@@ -127,8 +127,8 @@ We welcome contributions!
 
 [actions-badge]:            https://github.com/GalacticDynamics/optional_dependencies/workflows/CI/badge.svg
 [actions-link]:             https://github.com/GalacticDynamics/optional_dependencies/actions
-[codecov-badge]:            https://codecov.io/gh/GalacticDynamics/optional_deps/graph/badge.svg
-[codecov-link]:             https://codecov.io/gh/GalacticDynamics/optional_deps
+[codecov-badge]:            https://codecov.io/gh/GalacticDynamics/optional_dependencies/graph/badge.svg
+[codecov-link]:             https://codecov.io/gh/GalacticDynamics/optional_dependencies
 [pypi-link]:                https://pypi.org/project/optional_dependencies/
 [pypi-platforms]:           https://img.shields.io/pypi/pyversions/optional_dependencies
 [pypi-version]:             https://img.shields.io/pypi/v/optional_dependencies
