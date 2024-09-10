@@ -72,7 +72,7 @@ def get_version(pkg_name: str, /) -> Version | Literal[InstalledState.NOT_INSTAL
     Examples
     --------
     >>> get_version("packaging")
-    <Version('20.9')>
+    <Version('...')>
 
     """
     try:
@@ -125,17 +125,20 @@ def chain_checks(
     Examples
     --------
     >>> from packaging.version import Version
-    >>> from optional_dependencies import NOT_INSTALLED
+    >>> from optional_dependencies.utils import NOT_INSTALLED
 
     >>> version = Version("1.0")
     >>> chain_checks(version, version < Version("2.0"))
     <Version('1.0')>
 
     >>> chain_checks(version, version > Version("2.0"))
-    NOT_INSTALLED
+    <InstalledState.NOT_INSTALLED: False>
 
-    >>> chain_checks(NotInstalled("packaging"), False)
-    NOT_INSTALLED
+    >>> chain_checks(NOT_INSTALLED, True)
+    <InstalledState.NOT_INSTALLED: False>
+
+    >>> chain_checks(NOT_INSTALLED, False)
+    <InstalledState.NOT_INSTALLED: False>
 
     """
     if version is NOT_INSTALLED:

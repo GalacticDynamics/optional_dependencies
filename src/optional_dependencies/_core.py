@@ -149,7 +149,7 @@ class OptionalDependencyEnum(Enum):
         ...     PACKAGING = auto()
 
         >>> OptDeps.PACKAGING.version
-        <Version('20.9')>
+        <Version('...')>
 
         """
         if not self.installed:
