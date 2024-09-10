@@ -58,7 +58,7 @@ then [`packaging.version.parse`][Version-link]. If the package cannot be found
 then it is considered `InstalledState.NOT_INSTALLED`
 
 `InstalledState.NOT_INSTALLED` is an [`enum.Enum`][Enum-link] member that has a
-truthy value of `False`. THis can be useful for boolean checks, as
+truthy value of `False`. This can be useful for boolean checks, as
 [`packaging.Version`][Version-link] always has a truthy value of `True`.
 
 ```python
@@ -74,10 +74,9 @@ if OptDeps.PACKAGING:  # truthy value of `True`
 ### Low-Level API
 
 Sometimes the high-level API is insufficient to determine whether an optional
-dependency is present. For example, this can happen sometimes happen with
-compiled packages, where the package appears to be installed, but something is
-wrong. In these cases you can customize the enum members using the low-level
-API.
+dependency is present. For example, this can sometimes happen with compiled
+packages, where the package appears to be installed, but something is wrong. In
+these cases you can customize the enum members using the low-level API.
 
 The low-level functions are:
 
