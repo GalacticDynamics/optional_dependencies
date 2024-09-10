@@ -36,15 +36,12 @@
   requires-python = ">=3.8"
 
   [project.optional-dependencies]
-    dev = ["pytest >=6", "pytest-cov >=3"]
-    docs = [
-      "furo>=2023.08.17",
-      "myst_parser>=0.13",
-      "sphinx>=7.0",
-      "sphinx_autodoc_typehints",
-      "sphinx_copybutton",
+    test = [
+      "pytest >=6",
+      "pytest-cov >=3",
+      "sybil",
     ]
-    test = ["pytest >=6", "pytest-cov >=3"]
+    dev = ["dataclassish[test]"]
 
   [project.urls]
     "Bug Tracker" = "https://github.com/GalacticDynamics/optional_dependencies/issues"
@@ -58,7 +55,7 @@
   version.source               = "vcs"
 
   [tool.hatch.envs.default]
-    features     = ["test"]
+    features     = ["src", "test"]
     scripts.test = "pytest {args}"
 
 
@@ -67,7 +64,7 @@
   filterwarnings = ["error"]
   log_cli_level  = "INFO"
   minversion     = "6.0"
-  testpaths      = ["tests"]
+  testpaths      = ["src", "tests"]
   xfail_strict   = true
 
 
@@ -112,10 +109,6 @@
     ]
 
     [tool.ruff.lint.per-file-ignores]
-      "docs/conf.py" = [
-        "A001",   # Variable `copyright` is shadowing a Python builtin
-        "INP001", # implicit namespace package
-      ]
       "noxfile.py" = ["T20"]
       "tests/**" = [
         "ANN",
