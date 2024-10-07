@@ -1,10 +1,10 @@
 <h1 align='center'> optional_dependencies </h1>
-<h2 align="center">Construct Checks for Optional Dependencies</h2>
+<h3 align="center">Construct Checks for Optional Dependencies</h3>
 
 ## Installation
 
-[![PyPI platforms][pypi-platforms]][pypi-link]
 [![PyPI version][pypi-version]][pypi-link]
+[![PyPI platforms][pypi-platforms]][pypi-link]
 
 <!-- [![Conda-Forge][conda-badge]][conda-link] -->
 
