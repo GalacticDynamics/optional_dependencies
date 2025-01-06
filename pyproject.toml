@@ -108,6 +108,7 @@
       "ISC001",  # Conflicts with formatter
       "PLR09",   # Too many <...>
       "PLR2004", # Magic value used in comparison
+      "RUF022",  # Unsorted dunder __all__
     ]
 
     [tool.ruff.lint.per-file-ignores]
