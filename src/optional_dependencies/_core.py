@@ -60,7 +60,7 @@ class Comparator:
         """
         # Defer to the other object if it is not a Version
         if not isinstance(other, Version):
-            return NotImplemented
+            return NotImplemented  # type: ignore[no-any-return]
 
         # If the optional dependency is not installed, it is not greater than
         # the other version.
