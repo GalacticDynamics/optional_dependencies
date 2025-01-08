@@ -4,6 +4,12 @@ ci:
   autofix_commit_msg: "style: pre-commit fixes"
 
 repos:
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.1.0
+    hooks:
+      - id: commitizen
+        additional_dependencies: [cz-conventional-gitmoji]
+
   - repo: https://github.com/adamchainz/blacken-docs
     rev: "1.19.0"
     hooks:
