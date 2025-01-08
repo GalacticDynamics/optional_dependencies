@@ -19,7 +19,6 @@
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python",
     "Topic :: Scientific/Engineering",
@@ -61,10 +60,6 @@
   build.hooks.vcs.version-file = "src/optional_dependencies/_version.py"
   version.source               = "vcs"
 
-  [tool.hatch.envs.default]
-    features     = ["src", "test"]
-    scripts.test = "pytest {args}"
-
 
 [tool.pytest.ini_options]
   addopts        = ["--showlocals", "--strict-config", "--strict-markers", "-ra"]
@@ -101,7 +96,7 @@
 
 [tool.ruff]
   src            = ["src"]
-  target-version = "py38"
+  target-version = "py39"
 
   [tool.ruff.lint]
     extend-select = ["ALL"]
