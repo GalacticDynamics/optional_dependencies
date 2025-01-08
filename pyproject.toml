@@ -32,7 +32,7 @@
   license.file = "LICENSE"
   name = "optional_dependencies"
   readme = "README.md"
-  requires-python = ">=3.8"
+  requires-python = ">=3.9"
 
   [dependency-groups]
     dev = [
@@ -83,7 +83,7 @@
     '^conftest\.py$',                   # nox test configuration
   ]
   files = ["src"]
-  python_version = "3.8"
+  python_version = "3.9"
   strict = true
   warn_unreachable = true
   warn_unused_configs = true
@@ -134,6 +134,6 @@
     "missing-module-docstring",
     "wrong-import-position",
   ]
-  py-version = "3.8"
+  py-version = "3.9"
   reports.output-format = "colorized"
   similarities.ignore-imports = "yes"
