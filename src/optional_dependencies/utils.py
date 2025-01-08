@@ -22,7 +22,7 @@ from packaging.version import Version, parse
 class InstalledState(Enum):
     """Enumeration of the installed state of a package."""
 
-    NOT_INSTALLED: Literal[False] = False
+    NOT_INSTALLED = False
     """The package is not installed."""
 
 
