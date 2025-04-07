@@ -156,7 +156,7 @@ class OptionalDependencyEnum(Enum):
             msg = f"{self.name} is not installed"
             raise ImportError(msg)
 
-        return cast(Version, self.value)
+        return cast("Version", self.value)
 
     # ===============================================================
 

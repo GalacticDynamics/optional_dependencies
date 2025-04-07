@@ -18,9 +18,9 @@ class OptDeps(OptionalDependencyEnum):
 def test_enum_member_exists():
     assert hasattr(OptDeps, "PACKAGING"), "PACKAGING member should exist in OptDeps"
     assert hasattr(OptDeps, "PYTEST"), "PYTEST member should exist in OptDeps"
-    assert hasattr(
-        OptDeps, "NOTINSTALLED"
-    ), "NOTINSTALLED member should exist in OptDeps"
+    assert hasattr(OptDeps, "NOTINSTALLED"), (
+        "NOTINSTALLED member should exist in OptDeps"
+    )
 
 
 def test_installed():
