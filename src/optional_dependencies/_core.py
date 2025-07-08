@@ -189,3 +189,5 @@ class OptionalDependencyEnum(Enum):
 
         # Compare the versions
         return self.version == other
+
+    __hash__ = Enum.__hash__
