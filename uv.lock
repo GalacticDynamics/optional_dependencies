@@ -652,7 +652,6 @@ wheels = [
 
 [[package]]
 name = "optional-dependencies"
-version = "0.3.3.dev12+gac71e2d"
 source = { editable = "." }
 dependencies = [
     { name = "packaging" },
