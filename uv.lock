@@ -677,7 +677,7 @@ test = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "packaging" }]
+requires-dist = [{ name = "packaging", specifier = ">=23.2" }]
 
 [package.metadata.requires-dev]
 dev = [
