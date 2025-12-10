@@ -42,7 +42,7 @@ repos:
     rev: "v0.13.3"
     hooks:
       # Run the linter
-      - id: ruff
+      - id: ruff-check
         types_or: [python, pyi, jupyter]
         args: ["--fix", "--show-fixes"]
       # Run the formatter
@@ -62,6 +62,8 @@ repos:
     rev: "v2.4.1"
     hooks:
       - id: codespell
+        args: ["--toml", "pyproject.toml"]
+        additional_dependencies: ["tomli"]
 
   - repo: local
     hooks:
