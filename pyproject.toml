@@ -74,6 +74,10 @@ test = [
   version.source               = "vcs"
 
 
+[tool.codespell]
+skip = "uv.lock"
+
+
 [tool.pytest.ini_options]
   addopts        = ["--showlocals", "--strict-config", "--strict-markers", "-ra"]
   filterwarnings = ["error"]
@@ -150,6 +154,3 @@ test = [
   py-version = "3.9"
   reports.output-format = "colorized"
   similarities.ignore-imports = "yes"
-
-[tool.codespell]
-skip = "uv.lock"

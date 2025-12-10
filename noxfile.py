@@ -32,7 +32,7 @@ def precommit(s: nox.Session, /) -> None:
 @session(uv_groups=["lint"], reuse_venv=True)
 def pylint(s: nox.Session, /) -> None:
     """Run PyLint."""
-    s.run("pylint", "optional_dependencies", *s.posargs)
+    s.run("pylint", "src/optional_dependencies", *s.posargs)
 
 
 @session(uv_groups=["lint"], reuse_venv=True)
