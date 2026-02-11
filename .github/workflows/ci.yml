@@ -65,6 +65,8 @@ jobs:
   status:
     name: CI Pass
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: [format, tests]
     if: always()
     steps:
