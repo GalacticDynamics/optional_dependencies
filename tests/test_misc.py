@@ -87,7 +87,7 @@ def test_gt():
 
 def test_eq():
     # Compare with other OptionalDependencyEnum instances
-    assert OptDeps.PACKAGING == OptDeps.PACKAGING
+    assert OptDeps.PACKAGING is OptDeps.PACKAGING
     assert not OptDeps.PACKAGING == OptDeps.PYTEST  # noqa: SIM201
 
     # Compare with an unsupported type
