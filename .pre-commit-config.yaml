@@ -5,7 +5,7 @@ ci:
 
 repos:
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.11.1
+    rev: v4.13.9
     hooks:
       - id: commitizen
         additional_dependencies: [cz-conventional-gitmoji]
@@ -39,7 +39,7 @@ repos:
         args: [--prose-wrap=always]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.14.10"
+    rev: "v0.15.9"
     hooks:
       # Run the linter
       - id: ruff-check
@@ -59,7 +59,7 @@ repos:
           - pytest
 
   - repo: https://github.com/codespell-project/codespell
-    rev: "v2.4.1"
+    rev: "v2.4.2"
     hooks:
       - id: codespell
         args: ["--toml", "pyproject.toml"]
