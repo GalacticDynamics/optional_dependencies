@@ -14,7 +14,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
-  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.14",
   "Programming Language :: Python",
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
@@ -27,7 +27,7 @@ dynamic = ["version"]
 license.file = "LICENSE"
 name = "optional_dependencies"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 
 [project.urls]
   "Bug Tracker" = "https://github.com/GalacticDynamics/optional_dependencies/issues"
@@ -100,7 +100,7 @@ skip = ["uv.lock"]
     '^conftest\.py$',                   # nox test configuration
   ]
   files = ["src"]
-  python_version = "3.9"
+  python_version = "3.10"
   strict = true
   warn_unreachable = true
   warn_unused_configs = true
@@ -113,7 +113,7 @@ skip = ["uv.lock"]
 
 [tool.ruff]
   src            = ["src"]
-  target-version = "py39"
+  target-version = "py310"
 
   [tool.ruff.lint]
     extend-select = ["ALL"]
@@ -151,6 +151,6 @@ skip = ["uv.lock"]
     "missing-module-docstring",
     "wrong-import-position",
   ]
-  py-version = "3.9"
+  py-version = "3.10"
   reports.output-format = "colorized"
   similarities.ignore-imports = "yes"

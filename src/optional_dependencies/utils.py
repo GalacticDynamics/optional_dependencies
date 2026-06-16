@@ -1,7 +1,5 @@
 """Optional dependencies."""
 
-from __future__ import annotations
-
 __all__ = [
     "InstalledState",
     "NOT_INSTALLED",
