@@ -1,14 +1,13 @@
 """Optional dependencies."""
 
-from __future__ import annotations
-
 __all__: list[str] = []
 
 import operator
+from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum
 from types import MethodType
-from typing import Callable, Literal, cast
+from typing import Literal, cast
 
 from packaging.utils import canonicalize_name
 from packaging.version import Version
@@ -25,9 +24,9 @@ class Comparator:
 
     def __get__(
         self,
-        instance: OptionalDependencyEnum | None,
-        owner: type[OptionalDependencyEnum] | None,
-    ) -> Comparator | MethodType:
+        instance: "OptionalDependencyEnum | None",
+        owner: "type[OptionalDependencyEnum] | None",
+    ) -> "Comparator | MethodType":
         """Get the descriptor.
 
         Parameters
@@ -49,7 +48,7 @@ class Comparator:
         # Bind the descriptor to the instance
         return MethodType(self.__call__, instance)
 
-    def __call__(self, enum: OptionalDependencyEnum, other: object) -> bool:
+    def __call__(self, enum: "OptionalDependencyEnum", other: object) -> bool:
         """Compare two versions.
 
         Returns
