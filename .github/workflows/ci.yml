@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    if: ${{ always() && !cancelled() }}
+    if: ${{ !cancelled() }}
     needs: [format, tests]
     steps:
       - name: All required jobs passed
