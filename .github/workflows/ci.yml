@@ -67,8 +67,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    if: ${{ always() && !cancelled() }}
     needs: [format, tests]
-    if: always()
     steps:
       - name: All required jobs passed
         uses: re-actors/alls-green@release/v1
