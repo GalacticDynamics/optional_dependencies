@@ -6,13 +6,17 @@ import operator
 from collections.abc import Callable
 from dataclasses import dataclass
 from enum import Enum
-from types import MethodType
-from typing import Literal, cast
+from types import DynamicClassAttribute, MethodType
+from typing import Literal, TypeVar, cast, final
 
 from packaging.utils import canonicalize_name
 from packaging.version import Version
 
 from .utils import InstalledState, get_version
+
+#: Stands in for `typing.Self`, which is 3.11+; this package supports 3.10, and
+#: `typing_extensions` is not a dependency.
+_EnumT = TypeVar("_EnumT", bound="OptionalDependencyEnum")
 
 
 @dataclass(frozen=True)
@@ -73,8 +77,97 @@ class Comparator:
 # ===================================================================
 
 
+@final
+class _MemberKey:
+    """The internal ``_value_`` of an `OptionalDependencyEnum` member.
+
+    `enum.Enum` folds any member whose ``_value_`` compares equal to an earlier
+    one into an alias of that member -- silently, keeping the first name. A
+    version cannot serve as that key: every uninstalled dependency carries the
+    same `InstalledState.NOT_INSTALLED` sentinel, and distributions released
+    together share a version number, so a second uninstalled member, or a second
+    member of a co-released family, used to vanish into the first and report the
+    wrong package's state.
+
+    Wrapping the resolved version in one of these gives every member a key that
+    is distinct by identity, so no two of them can ever compare equal. The
+    wrapper is internal: `OptionalDependencyEnum.value` unwraps it, and `__repr__`
+    delegates so members still show as ``<OptDeps.PACKAGING: <Version('...')>>``.
+    """
+
+    __slots__ = ("resolved",)
+
+    def __init__(
+        self, resolved: Version | Literal[InstalledState.NOT_INSTALLED], /
+    ) -> None:
+        self.resolved = resolved
+
+    def __repr__(self) -> str:
+        return repr(self.resolved)
+
+
 class OptionalDependencyEnum(Enum):
     """An enumeration of optional dependencies."""
+
+    _value_: _MemberKey
+
+    # PYI019 wants `typing.Self` here; see `_EnumT` for why it cannot be used.
+    def __new__(  # noqa: PYI019
+        cls: type[_EnumT], value: Version | Literal[InstalledState.NOT_INSTALLED]
+    ) -> _EnumT:
+        """Give the member an alias-proof ``_value_``.
+
+        See `_MemberKey` for why the resolved version cannot be that key.
+
+        This has to happen in ``__new__`` rather than ``__init__``: from Python
+        3.11 on, `enum` snapshots ``_value_`` for the duplicate scan *before*
+        calling ``__init__``, so a reassignment there comes too late. Every
+        supported version (3.10+) honours a ``_value_`` set in ``__new__``.
+        """
+        obj = object.__new__(cls)
+        obj._value_ = _MemberKey(value)
+        return obj
+
+    @classmethod
+    def _missing_(cls, value: object) -> "OptionalDependencyEnum | None":
+        """Look a member up by its version, as ``Enum(value)`` used to.
+
+        Members are keyed internally on `_MemberKey`, so the by-value map no
+        longer holds bare versions. This restores the lookup, with the ambiguity
+        it always had: where several members share a version, the first one
+        declared wins.
+        """
+        return next((m for m in cls if m._value_.resolved == value), None)
+
+    def __reduce_ex__(self, proto: object) -> tuple[object, ...]:
+        """Pickle by name.
+
+        `enum.Enum` pickles by ``_value_``, which is now an identity-keyed
+        wrapper that would not survive the round trip. The name is the exact
+        key besides: versions do not distinguish members, which is the whole
+        problem being fixed here.
+        """
+        return getattr, (self.__class__, self._name_)
+
+    @DynamicClassAttribute
+    def value(self) -> Version | Literal[InstalledState.NOT_INSTALLED]:
+        """The version of the optional dependency, or `NOT_INSTALLED`.
+
+        Examples
+        --------
+        >>> from enum import auto
+        >>> class OptDeps(OptionalDependencyEnum):
+        ...     PACKAGING = auto()
+        ...     NOTINSTALLED = auto()
+
+        >>> OptDeps.PACKAGING.value
+        <Version('...')>
+
+        >>> OptDeps.NOTINSTALLED.value
+        <InstalledState.NOT_INSTALLED: False>
+
+        """
+        return self._value_.resolved
 
     @staticmethod
     def _generate_next_value_(
