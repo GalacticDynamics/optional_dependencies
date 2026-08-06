@@ -114,7 +114,8 @@ def test_low_level_api_members_are_distinct() -> None:
         D = get_version("nor-is-this")
 
     assert len({Chained.A, Chained.B, Chained.C, Chained.D}) == 4
-    assert Chained.A.installed and Chained.B.installed
+    assert Chained.A.installed
+    assert Chained.B.installed
     assert not Chained.C.installed
     assert not Chained.D.installed
     assert is_installed("packaging")
