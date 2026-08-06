@@ -137,7 +137,7 @@ class OptionalDependencyEnum(Enum):
         it always had: where several members share a version, the first one
         declared wins.
         """
-        return next((m for m in cls if m._value_.resolved == value), None)
+        return next((m for m in cls if m.value == value), None)
 
     def __reduce_ex__(self, proto: object) -> tuple[object, ...]:
         """Pickle by name.
@@ -147,7 +147,7 @@ class OptionalDependencyEnum(Enum):
         key besides: versions do not distinguish members, which is the whole
         problem being fixed here.
         """
-        return getattr, (self.__class__, self._name_)
+        return getattr, (self.__class__, self.name)
 
     @DynamicClassAttribute
     def value(self) -> Version | Literal[InstalledState.NOT_INSTALLED]:
