@@ -78,6 +78,11 @@ class Comparator:
 
 
 @final
+# `eq=False` is load-bearing, not tidiness: the generated `__eq__` compares by
+# field, so two keys wrapping equal versions would compare equal and `enum`
+# would alias their members straight back together. `repr=False` leaves the
+# delegating `__repr__` below in place.
+@dataclass(frozen=True, slots=True, eq=False, repr=False)
 class _MemberKey:
     """The internal ``_value_`` of an `OptionalDependencyEnum` member.
 
@@ -95,12 +100,7 @@ class _MemberKey:
     delegates so members still show as ``<OptDeps.PACKAGING: <Version('...')>>``.
     """
 
-    __slots__ = ("resolved",)
-
-    def __init__(
-        self, resolved: Version | Literal[InstalledState.NOT_INSTALLED], /
-    ) -> None:
-        self.resolved = resolved
+    resolved: Version | Literal[InstalledState.NOT_INSTALLED]
 
     def __repr__(self) -> str:
         return repr(self.resolved)
