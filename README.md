@@ -57,6 +57,26 @@ then
 then [`packaging.version.parse`][Version-link]. If the package cannot be found
 then it is considered `InstalledState.NOT_INSTALLED`
 
+Every member stays its own member, whatever its value. This matters because
+those values collide readily: any two dependencies that are both missing share
+the `NOT_INSTALLED` sentinel, and distributions released together share a
+version number. A plain [`enum.Enum`][Enum-link] folds equal-valued members into
+aliases of whichever was declared first, which would make
+`OptDeps.SECOND.installed` report the _first_ package's state.
+
+```python
+class OptDeps(OptionalDependencyEnum):
+    NOT_A_PACKAGE = auto()
+    ALSO_NOT_A_PACKAGE = auto()
+
+
+OptDeps.ALSO_NOT_A_PACKAGE.name
+# 'ALSO_NOT_A_PACKAGE'
+
+OptDeps.NOT_A_PACKAGE is OptDeps.ALSO_NOT_A_PACKAGE
+# False
+```
+
 `InstalledState.NOT_INSTALLED` is an [`enum.Enum`][Enum-link] member that has a
 truthy value of `False`. This can be useful for boolean checks, as
 [`packaging.Version`][Version-link] always has a truthy value of `True`.
