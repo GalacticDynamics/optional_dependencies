@@ -58,6 +58,14 @@ def test_value_is_still_the_version() -> None:
     assert OptDeps.NOTINSTALLED.value is NOT_INSTALLED
 
 
+@pytest.mark.parametrize("name", ["PACKAGING", "NOTINSTALLED"])
+def test_repr_delegates_to_the_version(name: str) -> None:
+    """The key wrapper is invisible: a member still renders as its version."""
+    member = OptDeps[name]
+    assert repr(member.value) in repr(member)
+    assert "_MemberKey" not in repr(member)
+
+
 def test_members_are_hashable_and_usable_as_keys() -> None:
     """Distinct members occupy distinct slots in a dict/set."""
     mapping = {m: m.name for m in OptDeps}
