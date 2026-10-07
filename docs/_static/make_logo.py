@@ -1,3 +1,5 @@
+# Copyright (c) 2024 GalacticDynamics Maintainers. All rights reserved.
+
 # /// script
 # requires-python = ">=3.11"
 # dependencies = ["resvg-py"]

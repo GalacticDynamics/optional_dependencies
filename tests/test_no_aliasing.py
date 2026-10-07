@@ -1,3 +1,5 @@
+# Copyright (c) 2024 GalacticDynamics Maintainers. All rights reserved.
+
 """Every member stays its own member, whatever its value.
 
 `enum.Enum` folds members whose values compare equal into a single member,

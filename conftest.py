@@ -1,3 +1,5 @@
+# Copyright (c) 2024 GalacticDynamics Maintainers. All rights reserved.
+
 """Doctest configuration."""
 
 from doctest import ELLIPSIS, NORMALIZE_WHITESPACE
